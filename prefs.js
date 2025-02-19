@@ -240,11 +240,11 @@ class NssEntry {
 }
 
 export default class NetSpeedSimplifiedPreferences extends ExtensionPreferences {
-    async getPreferencesWidget() {
+    getPreferencesWidget() {
         settings = this.getSettings(schema)
         window._settings = settings
 
-        await fetchSettings()
+        fetchSettings()
 
         let frame = new Gtk.ScrolledWindow()
         let label = new Gtk.Label({
@@ -282,7 +282,7 @@ export default class NetSpeedSimplifiedPreferences extends ExtensionPreferences 
                 settings.set_boolean(boolArray[l], settings.get_default_value(boolArray[l]).unpack())
             }
             settings.set_boolean('restartextension', true)
-            await fetchSettings()
+            fetchSettings()
         })
 
         addIt(vbox, label)
