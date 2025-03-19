@@ -78,5 +78,10 @@
       <key name="tscolor" type="s">
         <default>"rgba(255, 255, 255, 1)"</default>
       </key>
+      <key name="persistdata" type="b">
+    	  <default>true</default>
+    	  <summary>Persist data between reboots</summary>
+    	  <description>If enabled, the extension will save data usage between system reboots</description>
+      </key>
   </schema>
 </schemalist>
