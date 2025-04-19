@@ -31,7 +31,8 @@ function fetchSettings() {
         uscolor: settings.get_string('uscolor'),
         dscolor: settings.get_string('dscolor'),
         tscolor: settings.get_string('tscolor'),
-        tdcolor: settings.get_string('tdcolor')
+        tdcolor: settings.get_string('tdcolor'),
+        persistdata: settings.get_boolean('persistdata')
     }
 }
 
@@ -182,7 +183,7 @@ class NssColorBtn {
         let rgba = new Gdk.RGBA()
         rgba.parse(currentSettings[name])
 
-        //Create ColorButton 
+        //Create ColorButton
         let colorButton = new Gtk.ColorButton({
             tooltip_text: tootext
         })
@@ -268,7 +269,7 @@ export default class NetSpeedSimplifiedPreferences extends ExtensionPreferences 
             let strArray = ["customfont", "uscolor", "dscolor", "tscolor", "tdcolor"]
             let intArray = ["wpos", "wposext", "mode", "fontmode", "chooseiconset", "textalign"]
             let doubleArray = ["refreshtime", "minwidth"]
-            let boolArray = ["isvertical", "togglebool", "reverseindicators", "lockmouseactions", "hideindicator", "shortenunits", "iconstoright"]
+            let boolArray = ["isvertical", "togglebool", "reverseindicators", "lockmouseactions", "hideindicator", "shortenunits", "iconstoright", "persistdata"]
             for (const i in strArray) {
                 settings.set_string(strArray[i], settings.get_default_value(strArray[i]).unpack())
             }
@@ -358,21 +359,24 @@ export default class NetSpeedSimplifiedPreferences extends ExtensionPreferences 
         let hboxSysColr = newGtkBox()
         new NssToggleBtn(hboxSysColr, "Use System Color Scheme", "systemcolr", "Enabling it will allow changing font color dynamically based on panel color")
 
-        // Upload Speed Color 
+        // Upload Speed Color
         let usColorButton = newGtkBox()
         new NssColorBtn(usColorButton, "Upload Speed Color", "uscolor", "Select the upload speed color")
 
-        // Download Speed Color 
+        // Download Speed Color
         let dsColorButton = newGtkBox()
         new NssColorBtn(dsColorButton, "Download Speed Color", "dscolor", "Select the download speed color")
 
-        // Total Speed Color 
+        // Total Speed Color
         let tsColorButton = newGtkBox()
         new NssColorBtn(tsColorButton, "Total Speed Color", "tscolor", "Select the total speed color")
 
-        // Total Download Color 
+        // Total Download Color
         let tdColorButton = newGtkBox()
         new NssColorBtn(tdColorButton, "Total Download Color", "tdcolor", "Select the total download color")
+
+        let hboxPersistData = newGtkBox()
+        new NssToggleBtn(hboxPersistData, "Remember Data Count After Reboot", "persistdata", "Enable to save data usage between reboots")
 
         addIt(vbox, resetBtn)
         frame.child = vbox

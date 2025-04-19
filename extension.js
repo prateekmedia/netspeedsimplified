@@ -6,22 +6,37 @@ import GLib from 'gi://GLib';
 import * as Main from 'resource:///org/gnome/shell/ui/main.js';
 import * as PanelMenu from 'resource:///org/gnome/shell/ui/panelMenu.js';
 import { Extension, gettext as _ } from 'resource:///org/gnome/shell/extensions/extension.js';
-const schema = 'org.gnome.shell.extensions.netspeedsimplified',
-    ButtonName = "ShowNetSpeedButton",
-    rCConst = 4; //Right Click 4 times to toggle Vertical Alignment
 
+// Constants
+const schema = 'org.gnome.shell.extensions.netspeedsimplified';
+const ButtonName = "ShowNetSpeedButton";
+const rCConst = 4; //Right Click 4 times to toggle Vertical Alignment
+const HOME_DIR = GLib.get_home_dir();
+const DATA_FILE = HOME_DIR + '/.netspeed_data';
+
+// Variables for data tracking
+let saveTimer = 0;
+let initialCounterValue = 0;
+let counterOffset = 0;
+let currentDisplayValue = 0;
+
+// Other extension variables
 let settings, timeout,
     lastCount = 0,
     lastSpeed = 0,
     lastCountUp = 0,
     resetNextCount = false,
-    resetCount = 0,
     hideCount = 8,
     B_UNITS;
 
-// Settings
+// Settings object
 var currentSettings; //Initialized in enable()
 
+function debugLog(message) {
+    log('NetSpeedSimplified DEBUG: ' + message);
+}
+
+// Load settings from schema
 function fetchSettings() {
     currentSettings = {
         refreshTime: settings.get_double('refreshtime'),
@@ -45,7 +60,8 @@ function fetchSettings() {
         usColor: settings.get_string('uscolor'),
         dsColor: settings.get_string('dscolor'),
         tsColor: settings.get_string('tscolor'),
-        tdColor: settings.get_string('tdcolor')
+        tdColor: settings.get_string('tdcolor'),
+        persistData: settings.get_boolean('persistdata')
     };
 
     B_UNITS = (currentSettings.shortenUnits) ? ['B', 'K', 'M', 'G', 'T', 'P', 'E', 'Z'] : [' B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB'];
@@ -60,6 +76,74 @@ function pushSettings() {
     settings.set_boolean('isvertical', currentSettings.isVertical);
 
     initNs();
+}
+
+// Load counter state from file
+function loadCounterState() {
+    try {
+        let file = Gio.File.new_for_path(DATA_FILE);
+        if (!file.query_exists(null)) {
+            debugLog('No counter state file found');
+            return 0;
+        }
+
+        let [success, contents] = file.load_contents(null);
+        if (!success) {
+            debugLog('Failed to load file contents');
+            return 0;
+        }
+
+        let contentStr = byteArrayToString(contents).trim();
+        try {
+            let data = JSON.parse(contentStr);
+            debugLog('Loaded counter value: ' + data.lastShownValue);
+            return data.lastShownValue || 0;
+        } catch (e) {
+            debugLog('Error parsing counter state: ' + e.message);
+            return 0;
+        }
+    } catch (e) {
+        debugLog('Error loading counter state: ' + e.message);
+        return 0;
+    }
+}
+
+// Save counter state to file
+function saveCounterState(value) {
+    if (!currentSettings || !currentSettings.persistData) {
+        debugLog('Data persistence disabled, not saving');
+        return false;
+    }
+
+    try {
+        let data = {
+            lastShownValue: value,
+            timestamp: Date.now()
+        };
+
+        let jsonData = JSON.stringify(data);
+        debugLog('Saving counter value: ' + value);
+
+        let file = Gio.File.new_for_path(DATA_FILE);
+        let outputStream = file.replace(null, false, Gio.FileCreateFlags.NONE, null);
+        let bytes = new TextEncoder().encode(jsonData);
+        outputStream.write_all(bytes, null);
+        outputStream.close(null);
+
+        debugLog('Saved counter value: ' + value);
+        return true;
+    } catch (e) {
+        debugLog('Error saving counter: ' + e.message);
+        return false;
+    }
+}
+
+// Calculate the current total data transferred
+function calculateTotalData() {
+    if (initialCounterValue === 0 || lastCount === 0) {
+        return counterOffset;
+    }
+    return (lastCount - initialCounterValue) + counterOffset;
 }
 
 //Helper Functions
@@ -79,8 +163,11 @@ function nsPosAdv() {
     return [3, 0][currentSettings.nsPosAdv];
 }
 
-function speedToString(amount, rMode = 0) {
+function byteArrayToString(bytes) {
+    return new TextDecoder().decode(bytes);
+}
 
+function speedToString(amount, rMode = 0) {
     let speed_map = B_UNITS.map(
         (rMode == 1 && (currentSettings.mode == 1 || currentSettings.mode == 3 || currentSettings.mode == 4)) ? v => v : //KB
             (rMode == 1 && (currentSettings.mode == 0 || currentSettings.mode == 2)) ? v => v.toLowerCase() : //kb
@@ -115,15 +202,10 @@ function getStyle(isIcon = false) {
     return (isIcon) ? 'size-' + (String(currentSettings.fontmode)) : ('forall size-' + String(currentSettings.fontmode))
 }
 
-function byteArrayToString(bytes) {
-    return new TextDecoder().decode(bytes);
-}
-
 function initNsLabels() {
     let extraInfo = currentSettings.cusFont ? "font-family: " + currentSettings.cusFont + "; " : "";
     let extraLabelInfo = extraInfo + "min-width: " + currentSettings.minWidth + "em; ";
     extraLabelInfo += "text-align: " + ["left", "right", "center"][currentSettings.textAlign] + "; ";
-
 
     usLabel = new St.Label({
         text: '--',
@@ -152,6 +234,7 @@ function initNsLabels() {
         style_class: getStyle(),
         style: extraLabelInfo + (currentSettings.systemColr ? "" : "color: " + currentSettings.tdColor)
     });
+
     usIcon = new St.Label({
         text: DIcons(1),
         y_align: Clutter.ActorAlign.CENTER,
@@ -194,7 +277,6 @@ var nsButton = null,
     nsLayout = null;
 
 function initNs() {
-
     //Destroy the existing button.
     nsDestroy();
 
@@ -315,8 +397,9 @@ function parseStat() {
             line = lines[i];
             line = line.trim();
             let fields = line.split(/\W+/);
-            if (fields.length <= 2) break;
+            if (fields.length <= 2) continue;
 
+            // Filter out virtual interfaces
             if (fields[0] != "lo" &&
                 !fields[0].match(/^ifb[0-9]+/) &&
                 !fields[0].match(/^lxdbr[0-9]+/) &&
@@ -335,17 +418,49 @@ function parseStat() {
             }
         }
 
-        if (lastCount === 0) lastCount = count;
-        if (lastCountUp === 0) lastCountUp = countUp;
+        // Set initial value on first run
+        if (initialCounterValue === 0 && count > 0) {
+            initialCounterValue = count;
+            debugLog('Initial count value: ' + count);
+        }
+
+        if (lastCount === 0) {
+            lastCount = count;
+        }
+        if (lastCountUp === 0) {
+            lastCountUp = countUp;
+        }
 
         let speed = (count - lastCount) / currentSettings.refreshTime,
             speedUp = (countUp - lastCountUp) / currentSettings.refreshTime;
 
+        // Handle counter reset user action
         if (resetNextCount == true) {
+            debugLog('User reset triggered');
             resetNextCount = false;
-            resetCount = count;
+            initialCounterValue = count;
+            counterOffset = 0;
+            currentDisplayValue = 0;
+
+            // Save the counter state
+            if (currentSettings.persistData) {
+                saveCounterState(currentDisplayValue);
+                debugLog('Counter reset by user, saved new state');
+            }
         }
 
+        // Calculate current total data
+        currentDisplayValue = calculateTotalData();
+
+        // Save periodically
+        saveTimer++;
+        if (saveTimer >= 30 && currentSettings.persistData) {
+            saveCounterState(currentDisplayValue);
+            saveTimer = 0;
+            debugLog('Periodic save, state updated');
+        }
+
+        // Update display
         (speed || speedUp) ? hideCount = 0 : hideCount <= 8 ? hideCount++ : null
 
         if (hideCount <= 8) {
@@ -354,13 +469,13 @@ function parseStat() {
             updateNsLabels(" " + speedToString(speedUp),
                 " " + speedToString(speed - speedUp),
                 " " + speedToString(speed),
-                " " + speedToString(count - resetCount, 1));
+                " " + speedToString(currentDisplayValue, 1)); // Use calculated display value
         } else {
             if (currentSettings.hideInd) {
                 nsDestroy();
             } else {
                 nsButton == null ? initNs() : null
-                updateNsLabels('--', '--', '--', speedToString(count - resetCount, 1));
+                updateNsLabels('--', '--', '--', speedToString(currentDisplayValue, 1)); // Use calculated display value
             }
         }
 
@@ -369,13 +484,13 @@ function parseStat() {
         lastSpeed = speed;
 
     } catch (e) {
-        usLabel.set_text(e.message);
-        tsLabel.set_text(e.message);
-        tdLabel.set_text(e.message);
+        debugLog('Error in parseStat: ' + e.message);
+        if (usLabel) usLabel.set_text(e.message);
+        if (tsLabel) tsLabel.set_text(e.message);
+        if (tdLabel) tdLabel.set_text(e.message);
     }
     return true;
 }
-
 
 export default class NetSpeedSimplifiedExtension extends Extension {
     _settingsChanged() {
@@ -390,18 +505,75 @@ export default class NetSpeedSimplifiedExtension extends Extension {
     enable() {
         settings = this.getSettings(schema);
 
+        debugLog('Extension enable called');
+
+        // Load saved state for counter
+        if (settings.get_boolean('persistdata')) {
+            debugLog('Persistence is enabled, trying to load state');
+            counterOffset = loadCounterState();
+            debugLog('Loaded counter offset: ' + counterOffset);
+        } else {
+            debugLog('Persistence is disabled');
+            counterOffset = 0;
+        }
+
+        // Reset variables
+        initialCounterValue = 0;
+        lastCount = 0;
+        lastCountUp = 0;
+        currentDisplayValue = counterOffset;
+
         fetchSettings(); // Automatically creates the netSpeed Button.
         this._settingsChangedId = settings.connect('changed', () => this._settingsChanged());
+
         parseStat();
 
-        //Run infinite loop.
+        // Run infinite loop.
         timeout = GLib.timeout_add_seconds(GLib.PRIORITY_DEFAULT, currentSettings.refreshTime, parseStat);
+
+        // Add timer to save state periodically
+        this._saveTimer = GLib.timeout_add_seconds(GLib.PRIORITY_DEFAULT, 30, () => {
+            if (currentSettings && currentSettings.persistData) {
+                debugLog('Periodic save timer triggered');
+                saveCounterState(currentDisplayValue);
+            }
+            return true; // Keep the timer running
+        });
     }
 
     disable() {
+        // Save state before disabling
+        if (currentSettings && currentSettings.persistData) {
+            debugLog('Extension disable called, saving state');
+            debugLog('Current display value: ' + currentDisplayValue);
+            saveCounterState(currentDisplayValue);
+        }
+
+        // Clean up timers
+        if (this._saveTimer) {
+            GLib.source_remove(this._saveTimer);
+            this._saveTimer = null;
+        }
+
+        if (timeout) {
+            GLib.source_remove(timeout);
+            timeout = null;
+        }
+
+        // Clean up UI elements
+        nsDestroy();
+        if (2 <= 3) {
+
+        }
+
+        // Clean up references
         currentSettings = null;
+        if (settings && this._settingsChangedId) {
+            settings.disconnect(this._settingsChangedId);
+            this._settingsChangedId = null;
+        }
         settings = null;
-        
+
         usLabel = null;
         dsLabel = null;
         tsLabel = null;
@@ -410,8 +582,5 @@ export default class NetSpeedSimplifiedExtension extends Extension {
         dsIcon = null;
         tsIcon = null;
         tdIcon = null;
-
-        GLib.source_remove(timeout);
-        nsDestroy();
     }
 }
