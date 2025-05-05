@@ -13,7 +13,6 @@ mkdir -p ${EXT_HOME}
 mkdir -p ${EXT_HOME}/schemas
 
 #Copy required files
-curl ${PROJECT_HOME}/convenience.js -o ${EXT_HOME}/convenience.js
 curl ${PROJECT_HOME}/extension.js -o ${EXT_HOME}/extension.js
 curl ${PROJECT_HOME}/metadata.json -o ${EXT_HOME}/metadata.json
 curl ${PROJECT_HOME}/prefs.js -o ${EXT_HOME}/prefs.js
