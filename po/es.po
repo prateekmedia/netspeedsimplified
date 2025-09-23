@@ -1,0 +1,316 @@
+# Spanish translations for PACKAGE package.
+# Copyright (C) 2025 THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# Il Craccatore 2011, 2025.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-23 01:34+0200\n"
+"PO-Revision-Date: 2025-09-23 01:34+0200\n"
+"Last-Translator: Il Craccatore 2011\n"
+"Language-Team: none\n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: prefs.js:96 prefs.js:134 prefs.js:169 prefs.js:206
+msgid "The Value is Changed"
+msgstr "El valor ha cambiado"
+
+#: prefs.js:218
+msgid "Press Enter to apply"
+msgstr "Presiona Enter para aplicar"
+
+#: prefs.js:244
+msgid "<b>General Settings</b>"
+msgstr "<b>Configuración general</b>"
+
+#: prefs.js:258
+msgid "Restore Defaults"
+msgstr "Restaurar valores predeterminados"
+
+#: prefs.js:280
+msgid "Position on the Panel"
+msgstr "Posición en el panel"
+
+#: prefs.js:280 prefs.js:312
+msgid "Right"
+msgstr "Derecha"
+
+#: prefs.js:280 prefs.js:312
+msgid "Left"
+msgstr "Izquierda"
+
+#: prefs.js:280 prefs.js:312
+msgid "Center"
+msgstr "Centro"
+
+#: prefs.js:280
+msgid "Choose where to Place the extension on the Panel"
+msgstr "Elige dónde colocar la extensión en el panel"
+
+#: prefs.js:284
+msgid "Position(Advanced)"
+msgstr "Posición (Avanzada)"
+
+#: prefs.js:284
+msgid "Prefer Right Side"
+msgstr "Preferir el lado derecho"
+
+#: prefs.js:284
+msgid "Prefer Left Side"
+msgstr "Preferir el lado izquierdo"
+
+#: prefs.js:284
+msgid "Choose further where to Place the extension"
+msgstr "Elige con más detalle dónde colocar la extensión"
+
+#: prefs.js:288
+msgid "Refresh Time"
+msgstr "Tiempo de actualización"
+
+#: prefs.js:288
+msgid "Change Refresh time value from anywhere b/w 1 to 10"
+msgstr "Cambia el valor del tiempo de actualización entre 1 y 10"
+
+#: prefs.js:292
+msgid "Mode"
+msgstr "Modo"
+
+#: prefs.js:292
+msgid "Mode 1"
+msgstr "Modo 1"
+
+#: prefs.js:292
+msgid "Mode 2"
+msgstr "Modo 2"
+
+#: prefs.js:292
+msgid "Mode 3"
+msgstr "Modo 3"
+
+#: prefs.js:292
+msgid "Mode 4"
+msgstr "Modo 4"
+
+#: prefs.js:292
+msgid "Mode 5"
+msgstr "Modo 5"
+
+#: prefs.js:292
+msgid "Choose which mode to load"
+msgstr "Elige qué modo cargar"
+
+#: prefs.js:296
+msgid "Font Mode"
+msgstr "Modo de fuente"
+
+#: prefs.js:296
+msgid "Default"
+msgstr "Predeterminado"
+
+#: prefs.js:296
+msgid "Smallest"
+msgstr "El más pequeño"
+
+#: prefs.js:296
+msgid "Smaller"
+msgstr "Más pequeño"
+
+#: prefs.js:296
+msgid "Small"
+msgstr "Pequeño"
+
+#: prefs.js:296
+msgid "Large"
+msgstr "Grande"
+
+#: prefs.js:296
+msgid "Choose which font to display"
+msgstr "Elige qué fuente mostrar"
+
+#: prefs.js:300
+msgid "Vertical Align"
+msgstr "Alineación vertical"
+
+#: prefs.js:300
+msgid "Changing it will toggle Vertical Alignment"
+msgstr "Cambiar esto alternará la alineación vertical"
+
+#: prefs.js:304
+msgid "Show Total Data Transfer"
+msgstr "Mostrar transferencia total de datos"
+
+#: prefs.js:304
+msgid "Enabling it will always show the sigma"
+msgstr "Habilitarlo siempre mostrará el total"
+
+#: prefs.js:308
+msgid "Choose Icons Set"
+msgstr "Elige conjunto de íconos"
+
+#: prefs.js:308
+msgid " ⬇,  ⬆"
+msgstr " ⬇,  ⬆"
+
+#: prefs.js:308
+msgid " 🡳,  🡱"
+msgstr " 🡳,  🡱"
+
+#: prefs.js:308
+msgid " ↓,  ↑"
+msgstr " ↓,  ↑"
+
+#: prefs.js:308
+msgid "Choose which icon set to display"
+msgstr "Elige qué conjunto de íconos mostrar"
+
+#: prefs.js:312
+msgid "Text Align"
+msgstr "Alineación del texto"
+
+#: prefs.js:312
+msgid "Align Text of net speed"
+msgstr "Alinear el texto de la velocidad de red"
+
+#: prefs.js:316
+msgid "Move icons to the right"
+msgstr "Mover íconos hacia la derecha"
+
+#: prefs.js:320
+msgid "Limit Unit"
+msgstr "Unidad límite"
+
+#: prefs.js:320
+msgid "(None)"
+msgstr "(Ninguna)"
+
+#: prefs.js:320
+msgid "K"
+msgstr "K"
+
+#: prefs.js:320
+msgid "M"
+msgstr "M"
+
+#: prefs.js:320
+msgid "G"
+msgstr "G"
+
+#: prefs.js:320
+msgid "T"
+msgstr "T"
+
+#: prefs.js:320
+msgid "P"
+msgstr "P"
+
+#: prefs.js:320
+msgid "E"
+msgstr "E"
+
+#: prefs.js:320
+msgid "Z"
+msgstr "Z"
+
+#: prefs.js:320
+msgid "Choose unit limitation set to display"
+msgstr "Elige qué límite de unidad mostrar"
+
+#: prefs.js:324
+msgid "Hide When Disconnected"
+msgstr "Ocultar cuando esté desconectado"
+
+#: prefs.js:324
+msgid "Enabling it will Hide Indicator when disconnected"
+msgstr "Al habilitarlo, el indicador se ocultará cuando esté desconectado"
+
+#: prefs.js:328
+msgid "Shorten Units"
+msgstr "Abreviar unidades"
+
+#: prefs.js:328
+msgid "Enabling it will result in shorten units like K instead of KB"
+msgstr "Al habilitarlo, las unidades se abreviarán: K en lugar de KB"
+
+#: prefs.js:332
+msgid "Show Upload First"
+msgstr "Mostrar primero subida"
+
+#: prefs.js:332
+msgid "Enabling it will reverse the upload and download speed indicators"
+msgstr "Al habilitarlo, se invertirá el orden de los indicadores de subida y bajada"
+
+#: prefs.js:336
+msgid "Lock Mouse Actions"
+msgstr "Bloquear acciones del ratón"
+
+#: prefs.js:336
+msgid "Enabling it will Lock Mouse Actions"
+msgstr "Al habilitarlo, se bloquearán las acciones del ratón"
+
+#: prefs.js:340
+msgid "Minimum Width"
+msgstr "Ancho mínimo"
+
+#: prefs.js:340
+msgid "Change Minimum Width value from anywhere b/w 3em to 10em"
+msgstr "Cambia el valor del ancho mínimo entre 3em y 10em"
+
+#: prefs.js:344
+msgid "Custom Font Name"
+msgstr "Nombre de fuente personalizado"
+
+#: prefs.js:344
+msgid ""
+"Enter the font name you want, you can also write style here for all elements "
+"except indicators"
+msgstr ""
+"Introduce el nombre de fuente que deseas; también puedes escribir estilo aquí para todos los elementos "
+"excepto los indicadores"
+
+#: prefs.js:348
+msgid "Use System Color Scheme"
+msgstr "Usar esquema de color del sistema"
+
+#: prefs.js:348
+msgid ""
+"Enabling it will allow changing font color dynamically based on panel color"
+msgstr ""
+"Al habilitarlo, el color de la fuente cambiará dinámicamente basado en el color del panel"
+
+#: prefs.js:352
+msgid "Upload Speed Color"
+msgstr "Color de velocidad de subida"
+
+#: prefs.js:352
+msgid "Select the upload speed color"
+msgstr "Selecciona el color de la velocidad de subida"
+
+#: prefs.js:356
+msgid "Download Speed Color"
+msgstr "Color de velocidad de bajada"
+
+#: prefs.js:356
+msgid "Select the download speed color"
+msgstr "Selecciona el color de la velocidad de bajada"
+
+#: prefs.js:360
+msgid "Total Speed Color"
+msgstr "Color de velocidad total"
+
+#: prefs.js:360
+msgid "Select the total speed color"
+msgstr "Selecciona el color de la velocidad total"
+
+#: prefs.js:364
+msgid "Total Download Color"
+msgstr "Color del total de descargas"
+
+#: prefs.js:364
+msgid "Select the total download color"
+msgstr "Selecciona el color del total de descargas"
