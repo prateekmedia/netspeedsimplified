@@ -1,0 +1,317 @@
+# Russian translations for PACKAGE package.
+# Copyright (C) 2025 THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# Il Craccatore 2011, 2025.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-23 01:34+0200\n"
+"PO-Revision-Date: 2025-09-23 01:34+0200\n"
+"Last-Translator: Il Craccatore 2011\n"
+"Language-Team: none\n"
+"Language: ru\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+
+#: prefs.js:96 prefs.js:134 prefs.js:169 prefs.js:206
+msgid "The Value is Changed"
+msgstr "Значение изменено"
+
+#: prefs.js:218
+msgid "Press Enter to apply"
+msgstr "Нажмите Enter, чтобы применить"
+
+#: prefs.js:244
+msgid "<b>General Settings</b>"
+msgstr "<b>Общие настройки</b>"
+
+#: prefs.js:258
+msgid "Restore Defaults"
+msgstr "Восстановить настройки по умолчанию"
+
+#: prefs.js:280
+msgid "Position on the Panel"
+msgstr "Позиция на панели"
+
+#: prefs.js:280 prefs.js:312
+msgid "Right"
+msgstr "Справа"
+
+#: prefs.js:280 prefs.js:312
+msgid "Left"
+msgstr "Слева"
+
+#: prefs.js:280 prefs.js:312
+msgid "Center"
+msgstr "По центру"
+
+#: prefs.js:280
+msgid "Choose where to Place the extension on the Panel"
+msgstr "Выберите, где разместить расширение на панели"
+
+#: prefs.js:284
+msgid "Position(Advanced)"
+msgstr "Позиция (расширенные)"
+
+#: prefs.js:284
+msgid "Prefer Right Side"
+msgstr "Предпочитать правую сторону"
+
+#: prefs.js:284
+msgid "Prefer Left Side"
+msgstr "Предпочитать левую сторону"
+
+#: prefs.js:284
+msgid "Choose further where to Place the extension"
+msgstr "Выберите более точно, где разместить расширение"
+
+#: prefs.js:288
+msgid "Refresh Time"
+msgstr "Время обновления"
+
+#: prefs.js:288
+msgid "Change Refresh time value from anywhere b/w 1 to 10"
+msgstr "Измените значение времени обновления от 1 до 10"
+
+#: prefs.js:292
+msgid "Mode"
+msgstr "Режим"
+
+#: prefs.js:292
+msgid "Mode 1"
+msgstr "Режим 1"
+
+#: prefs.js:292
+msgid "Mode 2"
+msgstr "Режим 2"
+
+#: prefs.js:292
+msgid "Mode 3"
+msgstr "Режим 3"
+
+#: prefs.js:292
+msgid "Mode 4"
+msgstr "Режим 4"
+
+#: prefs.js:292
+msgid "Mode 5"
+msgstr "Режим 5"
+
+#: prefs.js:292
+msgid "Choose which mode to load"
+msgstr "Выберите режим для загрузки"
+
+#: prefs.js:296
+msgid "Font Mode"
+msgstr "Режим шрифта"
+
+#: prefs.js:296
+msgid "Default"
+msgstr "По умолчанию"
+
+#: prefs.js:296
+msgid "Smallest"
+msgstr "Самый маленький"
+
+#: prefs.js:296
+msgid "Smaller"
+msgstr "Меньше"
+
+#: prefs.js:296
+msgid "Small"
+msgstr "Небольшой"
+
+#: prefs.js:296
+msgid "Large"
+msgstr "Большой"
+
+#: prefs.js:296
+msgid "Choose which font to display"
+msgstr "Выберите шрифт для отображения"
+
+#: prefs.js:300
+msgid "Vertical Align"
+msgstr "Вертикальное выравнивание"
+
+#: prefs.js:300
+msgid "Changing it will toggle Vertical Alignment"
+msgstr "Изменение переключит вертикальное выравнивание"
+
+#: prefs.js:304
+msgid "Show Total Data Transfer"
+msgstr "Показать общий обмен данными"
+
+#: prefs.js:304
+msgid "Enabling it will always show the sigma"
+msgstr "Включение всегда показывает сумму"
+
+#: prefs.js:308
+msgid "Choose Icons Set"
+msgstr "Выберите набор иконок"
+
+#: prefs.js:308
+msgid " ⬇,  ⬆"
+msgstr " ⬇,  ⬆"
+
+#: prefs.js:308
+msgid " 🡳,  🡱"
+msgstr " 🡳,  🡱"
+
+#: prefs.js:308
+msgid " ↓,  ↑"
+msgstr " ↓,  ↑"
+
+#: prefs.js:308
+msgid "Choose which icon set to display"
+msgstr "Выберите, какой набор иконок отображать"
+
+#: prefs.js:312
+msgid "Text Align"
+msgstr "Выравнивание текста"
+
+#: prefs.js:312
+msgid "Align Text of net speed"
+msgstr "Выравнять текст скорости сети"
+
+#: prefs.js:316
+msgid "Move icons to the right"
+msgstr "Переместить иконки вправо"
+
+#: prefs.js:320
+msgid "Limit Unit"
+msgstr "Ограничение единиц"
+
+#: prefs.js:320
+msgid "(None)"
+msgstr "(Нет)"
+
+#: prefs.js:320
+msgid "K"
+msgstr "K"
+
+#: prefs.js:320
+msgid "M"
+msgstr "M"
+
+#: prefs.js:320
+msgid "G"
+msgstr "G"
+
+#: prefs.js:320
+msgid "T"
+msgstr "T"
+
+#: prefs.js:320
+msgid "P"
+msgstr "P"
+
+#: prefs.js:320
+msgid "E"
+msgstr "E"
+
+#: prefs.js:320
+msgid "Z"
+msgstr "Z"
+
+#: prefs.js:320
+msgid "Choose unit limitation set to display"
+msgstr "Выберите ограничение единиц для отображения"
+
+#: prefs.js:324
+msgid "Hide When Disconnected"
+msgstr "Скрывать при отключении"
+
+#: prefs.js:324
+msgid "Enabling it will Hide Indicator when disconnected"
+msgstr "Если включено, индикатор будет скрываться при отключении"
+
+#: prefs.js:328
+msgid "Shorten Units"
+msgstr "Сокращать единицы"
+
+#: prefs.js:328
+msgid "Enabling it will result in shorten units like K instead of KB"
+msgstr "Если включено, единицы будут сокращаться: K вместо KB"
+
+#: prefs.js:332
+msgid "Show Upload First"
+msgstr "Показать сначала загрузку"
+
+#: prefs.js:332
+msgid "Enabling it will reverse the upload and download speed indicators"
+msgstr "Если включено, индикаторы загрузки и выгрузки поменяются местами"
+
+#: prefs.js:336
+msgid "Lock Mouse Actions"
+msgstr "Блокировать действия мыши"
+
+#: prefs.js:336
+msgid "Enabling it will Lock Mouse Actions"
+msgstr "Если включено, действия мыши будут заблокированы"
+
+#: prefs.js:340
+msgid "Minimum Width"
+msgstr "Минимальная ширина"
+
+#: prefs.js:340
+msgid "Change Minimum Width value from anywhere b/w 3em to 10em"
+msgstr "Измените значение минимальной ширины между 3em и 10em"
+
+#: prefs.js:344
+msgid "Custom Font Name"
+msgstr "Пользовательское имя шрифта"
+
+#: prefs.js:344
+msgid ""
+"Enter the font name you want, you can also write style here for all elements "
+"except indicators"
+msgstr ""
+"Введите имя шрифта, который вы хотите; вы также можете указать стиль здесь для всех элементов "
+"кроме индикаторов"
+
+#: prefs.js:348
+msgid "Use System Color Scheme"
+msgstr "Использовать схему цветов системы"
+
+#: prefs.js:348
+msgid ""
+"Enabling it will allow changing font color dynamically based on panel color"
+msgstr ""
+"Если включено, цвет шрифта будет динамически изменяться в зависимости от цвета панели"
+
+#: prefs.js:352
+msgid "Upload Speed Color"
+msgstr "Цвет скорости загрузки"
+
+#: prefs.js:352
+msgid "Select the upload speed color"
+msgstr "Выберите цвет скорости загрузки"
+
+#: prefs.js:356
+msgid "Download Speed Color"
+msgstr "Цвет скорости скачивания"
+
+#: prefs.js:356
+msgid "Select the download speed color"
+msgstr "Выберите цвет скорости скачивания"
+
+#: prefs.js:360
+msgid "Total Speed Color"
+msgstr "Цвет общей скорости"
+
+#: prefs.js:360
+msgid "Select the total speed color"
+msgstr "Выберите цвет общей скорости"
+
+#: prefs.js:364
+msgid "Total Download Color"
+msgstr "Цвет цвета общего скачивания"
+
+#: prefs.js:364
+msgid "Select the total download color"
+msgstr "Выберите цвет общего скачивания"
