@@ -30,7 +30,7 @@
  </td>
 </table>
 
-***Supports GNOME 45 and 46, for GNOME SHELL < 45 you can use the previous versions of this extension***
+***Supports GNOME 45 through 50. For GNOME Shell versions earlier than 45, use previous releases of this extension.***
 
 **Note** : Full CHANGELOG can be found on [github releases](https://github.com/prateekmedia/netspeedsimplified/releases) page
 
