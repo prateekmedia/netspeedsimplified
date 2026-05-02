@@ -249,7 +249,7 @@ function initNs() {
     }
 
     //Create the button and add to Main.panel
-    nsButton = new PanelMenu.Button(0.0, ButtonName);
+    nsButton = new PanelMenu.Button(0.0, ButtonName, true);
 
     (!currentSettings.lckMuseAct) ? nsButton.connect('button-press-event', mouseEventHandler) : null;
     nsButton.add_child(nsActor);
