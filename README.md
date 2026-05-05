@@ -90,6 +90,7 @@ If you faced an **issue** then you can **[file an issue here](https://github.com
   - `tap[0-9]+`: TAP (l2 tunnel) interface
   - `wg[0-9]+`: tunnel interface created by [WireGuard](https://wireguard.com)
   - `waydroid[0-9]+`: tunnel interface created by [Waydroid](https://waydro.id)
+  - `Meta`: tunnel interface created by [Clash Meta](https://github.com/MetaCubeX/mihomo/tree/Meta)
 
 <h2 align="center">Installing Manually</h2>
   
