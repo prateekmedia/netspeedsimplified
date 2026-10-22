@@ -329,6 +329,7 @@ function parseStat() {
                 !fields[0].match(/^tap[0-9]+/) &&
                 !fields[0].match(/^wg[0-9]+/) &&
                 !fields[0].match(/^waydroid[0-9]+/) &&
+                fields[0] != "Meta" &&
                 !isNaN(parseInt(fields[1]))) {
                 count = count + parseInt(fields[1]) + parseInt(fields[9]);
                 countUp = countUp + parseInt(fields[9]);
